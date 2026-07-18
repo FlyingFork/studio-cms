@@ -3,13 +3,14 @@ FROM node:22-alpine AS deps
 WORKDIR /app
 RUN corepack enable
 ENV HUSKY=0
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Builder
 FROM node:22-alpine AS builder
 WORKDIR /app
 RUN corepack enable
+ENV HUSKY=0
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npx prisma generate
