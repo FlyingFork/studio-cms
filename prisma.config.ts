@@ -7,7 +7,9 @@ const prismaEnvSchema = z.object({
   DATABASE_URL: z.string().url(),
 });
 
-const env = prismaEnvSchema.parse(process.env);
+const url = process.env.SKIP_ENV_VALIDATION
+  ? (process.env.DATABASE_URL ?? 'postgresql://build:build@localhost:5432/build')
+  : prismaEnvSchema.parse(process.env).DATABASE_URL;
 
 export default defineConfig({
   schema: 'prisma/schema.prisma',
@@ -15,6 +17,6 @@ export default defineConfig({
     path: 'prisma/migrations',
   },
   datasource: {
-    url: env.DATABASE_URL,
+    url,
   },
 });

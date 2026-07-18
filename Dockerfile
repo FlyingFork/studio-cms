@@ -11,6 +11,7 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 RUN corepack enable
 ENV HUSKY=0
+ENV SKIP_ENV_VALIDATION=true
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npx prisma generate
