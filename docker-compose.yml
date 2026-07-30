@@ -1,7 +1,7 @@
 services:
   migrate:
     image: registry/studio-cms:${TAG}
-    command: ["pnpm", "dlx", "prisma", "migrate", "deploy"]
+    command: ["pnpm", "exec", "prisma", "migrate", "deploy"]
     env_file: .env.production
     networks:
       - shared-db
