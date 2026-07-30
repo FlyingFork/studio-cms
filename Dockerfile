@@ -40,4 +40,4 @@ USER nextjs
 EXPOSE 3000
 ENV PORT=3000 HOSTNAME=0.0.0.0
 
-CMD ["pnpm", "start"]
+CMD ["node_modules/.bin/next", "start"]

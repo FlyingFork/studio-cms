@@ -1,7 +1,7 @@
 services:
   migrate:
     image: registry/studio-cms:${TAG}
-    command: ["pnpm", "exec", "prisma", "migrate", "deploy"]
+    command: ["node_modules/.bin/prisma", "migrate", "deploy"]
     env_file: .env.production
     networks:
       - shared-db
@@ -34,7 +34,7 @@ services:
 
   worker:
     image: registry/studio-cms:${TAG}
-    command: ["pnpm", "worker:start"]
+    command: ["node_modules/.bin/tsx", "src/worker/index.ts"]
     env_file: .env.production
     volumes: [uploads:/app/uploads]
     depends_on:
