@@ -6,3 +6,6 @@ if (process.env.NODE_ENV === "production") {
     tracesSampleRate: 0.1,
   });
 }
+
+export const onRouterTransitionStart =
+  process.env.NODE_ENV === "production" ? Sentry.captureRouterTransitionStart : undefined;
