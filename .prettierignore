@@ -1,0 +1,8 @@
+.next
+node_modules
+uploads
+pnpm-lock.yaml
+prisma/migrations
+.agents
+.claude
+.windsurf
