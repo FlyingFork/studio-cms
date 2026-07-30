@@ -1,6 +1,13 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resend: Resend | null = null;
+
+function getResendClient() {
+  if (!resend) {
+    resend = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resend;
+}
 
 export async function sendEmail({
   to,
@@ -11,8 +18,8 @@ export async function sendEmail({
   subject: string;
   html: string;
 }) {
-  const { error } = await resend.emails.send({
-    from: process.env.EMAIL_FROM!, // e.g. "Studio CMS <noreply@yourdomain.com>"
+  const { error } = await getResendClient().emails.send({
+    from: process.env.EMAIL_FROM!,
     to,
     subject,
     html,
