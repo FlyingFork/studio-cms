@@ -15,7 +15,8 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               "img-src 'self' data: blob:",
-              "script-src 'self' 'unsafe-inline'",
+              "script-src 'self' 'unsafe-inline' https://analytics.flyingfork.dev",
+              "connect-src 'self' https://analytics.flyingfork.dev https://errors.flyingfork.dev",
               "style-src 'self' 'unsafe-inline'",
               "frame-ancestors 'none'",
             ].join("; "),
