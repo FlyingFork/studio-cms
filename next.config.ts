@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   async headers() {
@@ -25,4 +26,11 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default process.env.NODE_ENV === "production"
+  ? withSentryConfig(nextConfig, {
+      org: "your-org",
+      project: "your-project",
+      sentryUrl: "https://your-glitchtip-domain.com",
+      silent: !process.env.CI,
+    })
+  : nextConfig;
